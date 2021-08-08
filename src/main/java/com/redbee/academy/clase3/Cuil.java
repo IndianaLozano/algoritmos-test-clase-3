@@ -41,7 +41,38 @@ public class Cuil {
      * @return
      */
     public static Integer calcular(Integer tipoPersona, Integer dni) {
-        // TODO: implementar
-        return null;
+        Integer dNI = tipoPersona * 1000000 + dni;
+
+        // Multiplicacion de los diez dígitos y suma de valores obtenidos + division
+        System.out.println(multiplicacionYSuma(dNI));
+        Double result = multiplicacionYSuma(dNI) / 11;
+
+        int primerDecimal = getPrimerDecimal(result);
+
+        return 11 - primerDecimal;
+    }
+
+    public static Double multiplicacionYSuma(Integer dni){
+        Integer dNI = dni;
+        Integer suma = 0, multiplicador = 5;
+        while (dNI > 999999){
+            String stringFirstDigitDNI = dNI.toString().substring(0, 1);
+            suma += Integer.parseInt(stringFirstDigitDNI) * multiplicador;
+            multiplicador--;
+            dNI = Integer.parseInt(dNI.toString().substring(1));
+        }
+        multiplicador = 7;
+        while (dNI > 9){
+            String stringFirstDigitDNI = dNI.toString().substring(0, 1);
+            suma += Integer.parseInt(stringFirstDigitDNI) * multiplicador;
+            multiplicador--;
+            dNI = Integer.parseInt(dNI.toString().substring(1));
+        }
+        Double result = suma.doubleValue();
+        return result;
+    }
+
+    public static Integer getPrimerDecimal(Double numero) {
+        return (int) Math.round(numero * 100.0) % 10;
     }
 }

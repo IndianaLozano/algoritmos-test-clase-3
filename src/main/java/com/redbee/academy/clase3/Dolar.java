@@ -28,8 +28,17 @@ public class Dolar {
      * @param historicoDolar
      * @return
      */
-    public static Float resolver(List<Float> historicoDolar) {
-        //TODO: implementar
-        return null;
+    public static double resolver(List<Float> historicoDolar) {
+        List<Float> historicoDollar = historicoDolar;
+        Float mayorAlza = 0F;
+        for(int i = 1; i < historicoDollar.size(); i++){
+            if(historicoDollar.get(i) > historicoDollar.get(i - 1)){
+                if( historicoDollar.get(i) - historicoDollar.get(i-1) > mayorAlza){
+                    mayorAlza = historicoDollar.get(i) - historicoDollar.get(i-1);
+                }
+            }
+        }
+        int temp = (int) (mayorAlza * 100.0);
+        return ((float) temp) / 100.0;
     }
 }
